@@ -10,14 +10,69 @@ let textOverlap;
 
 var activatedOverlap = false;
 
+// Fonctions de stylisation des boutons
+function buttonOut(){
+  this.style('background-color','#242424');
+  this.style('color','#FFFFFF');
+}
+
+function greenButtonOver(){
+  this.style('background-color','#9ACD32');
+  this.style('color','#000000');
+}
+
+function pinkButtonOver(){
+  this.style('background-color','#FF69B4');
+  this.style('color','#000000');
+}
+
+function blueButtonOver(){
+  this.style('background-color','#87CEEB');
+  this.style('color','#000000');
+}
+
+function orangeButtonOver(){
+  this.style('background-color','#FFA500');
+  this.style('color','#000000');
+}
+
+function violetButtonOver(){
+  this.style('background-color','#8A2BE2');
+  this.style('color','#000000');
+}
+
 
 function setup() {
-  let title = createElement('h1', 'Titre');
-  let names = createElement('h2', 'nos noms');
-  let presentation = createElement('p', 'blabladela présentation cest koul');
+  textFont('Montserrat');
+  let title = createElement('h1', 'Walk Through Raster');
+  title.style('color', '#FFA500');
+  let subtitle=createElement('h2', 'by Frieder Nake');
+  
+  let presentation = createElement('p', '<strong>Made in :</strong> 1967 <br> <strong>Dimensions :</strong> 25.75 inches per 25.75 inches (65,4 m x 65,4cm)(with the frame) <br> 50,8 x 50,8 cm (without frame) <br><strong>Machine used :</strong> ZUSE Graphomat Z64 draw the image <br><strong>Computer used :</strong> Telefunken TR4 <br><strong>Software :</strong> Walk-through-Raster <br><strong> Programming language : </strong>ALGOL 60');
+  
+  let ourInterpretation = createElement('h3', "Our interpretation :");
+  ourInterpretation.style('color', '#FFA500	');
+  
   let interpretation = createElement('p', 'blabladela interpretation cest koul');
   
-  createElement('test').html("<button type='submit'><a href='./sketch.js' download='NGOTTA_LAFAURIE_p5js.js'>accès au code source</a></button>");
+   let colorInterpretation = createElement('h4', "Change Color Mode");
+  colorInterpretation.style('color', '#87CEEB	');
+  
+  let colorExplanation = createElement('p', 'pourquoi les couleurs cest BO');
+  
+let artworkInterpretation = createElement('h4', "Change Artwork Mode");
+  artworkInterpretation.style('color', '#87CEEB	');
+  
+  let artworkExplanation = createElement('p', 'pourquoi plusieurs choix + overlap ');
+  
+  let otherInterpretation = createElement('h4', "Other modifications");
+  otherInterpretation.style('color', '#87CEEB');
+  
+  let otherExplanation = createElement('p', 'tout le reste, les modifs etc ');
+  
+  
+  let names=createElement('h5',"Aurore Lafaurie & Sarah N'GOTTA");
+  names.style('color','#242424');
   
   createCanvas(800, 800);
   background('#fefaef');
@@ -27,20 +82,38 @@ function setup() {
   slider.position(810, 15);
   slider.style('width', '80px');
   sliderText = createP();
-  sliderText.style('color', '#fefaef');
+  sliderText.style('color', '#242424');
   sliderText.position(900, 0);
-  sliderText.html('quantité de formes');
+  sliderText.html('squares quantity');
   
   //Initialisation des boutons
-    buttons[0] = createButton('sauvegarder');
-    buttons[1] = createButton('nouvelle version');
-    buttons[2] = createButton('changer de couleur');
+  buttons[0] = createButton('save artwork');
+  buttons[0].mouseOver(greenButtonOver);
+
+  buttons[1] = createButton('new artwork');
+  buttons[1].mouseOver(pinkButtonOver);
   
-    textOverlap = 'activer overlap';
-    buttons[3] = createButton(textOverlap);
+  buttons[2] = createButton('change color');
+  buttons[2].mouseOver(blueButtonOver);
   
-  for(let i=0; i<4; i++){
-    buttons[i].position(810, 50+i*35);
+  textOverlap = 'turn on overlap function';
+  buttons[3] = createButton(textOverlap);
+  buttons[3].mouseOver(orangeButtonOver);
+  
+  
+  buttons[4]=createElement('button').html("<a style='text-decoration:none;color:#ffffff' href='./sketch.js' download='NGOTTA_LAFAURIE_p5js.js'>source code</a>");
+  buttons[4].mouseOver(violetButtonOver);
+  
+  
+  for(let i=0; i<5; i++){
+    buttons[i].style('text-decoration', 'none');
+    buttons[i].style('height','50px');
+    buttons[i].style('border-radius','15px');
+    buttons[i].style('color','#ffffff'); 
+    buttons[i].style('border','none');
+    buttons[i].style('background-color','#242424');
+    buttons[i].position(810, 50+i*80);  
+    buttons[i].mouseOut(buttonOut);
   }
     buttons[0].mousePressed(saveCanva);
     buttons[1].mousePressed(newVersion);
@@ -52,13 +125,14 @@ function setup() {
   newVersion();
 }
 
+
 function versionWithOverlap(){
   if(!activatedOverlap){
-    textOverlap = 'désactiver overlap';
+    textOverlap = 'turn off overlap function';
     buttons[3].html(textOverlap);
     activatedOverlap = true;
   } else {
-    textOverlap = 'activer overlap';
+    textOverlap = 'turn on overlap function';
     buttons[3].html(textOverlap);
     activatedOverlap = false;
   }
